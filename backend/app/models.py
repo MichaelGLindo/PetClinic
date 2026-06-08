@@ -31,3 +31,15 @@ class Turno(Base):
     mascota_id = Column(Integer, ForeignKey("mascotas.id"), nullable=True)
 
     mascota = relationship("Mascota", lazy="joined")
+
+
+class HistorialClinico(Base):
+    __tablename__ = "historiales_clinicos"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    fecha = Column(DateTime, nullable=True)
+    descripcion = Column(String(1000), nullable=True)
+    diagnostico = Column(String(500), nullable=True)
+    mascota_id = Column(Integer, ForeignKey("mascotas.id"), nullable=True)
+
+    mascota = relationship("Mascota", lazy="joined")

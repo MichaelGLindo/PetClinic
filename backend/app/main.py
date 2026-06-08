@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.exc import IntegrityError
 from app import models, database
-from app.routers import duenos, mascotas, turnos
+from app.routers import duenos, mascotas, turnos, dashboard, historiales
 
 # Create DB tables (similar to spring.jpa.hibernate.ddl-auto=update)
 try:
@@ -14,6 +16,29 @@ app = FastAPI(
     description="Python FastAPI backend for PetClinic",
     version="1.0.0"
 )
+
+@app.exception_handler(IntegrityError)
+def integrity_exception_handler(request: Request, exc: IntegrityError):
+    error_msg = str(exc.orig)
+    if "Duplicate entry" in error_msg:
+        return JSONResponse(
+            status_code=400,
+            content={"detail": "Ya existe un registro con esa cédula o clave identificadora."}
+        )
+    elif "Cannot delete or update a parent row" in error_msg:
+        return JSONResponse(
+            status_code=400,
+            content={"detail": "No se puede eliminar el registro porque tiene datos relacionados asociados."}
+        )
+    elif "a foreign key constraint fails" in error_msg:
+        return JSONResponse(
+            status_code=400,
+            content={"detail": "El registro relacionado especificado no existe."}
+        )
+    return JSONResponse(
+        status_code=400,
+        content={"detail": f"Error de integridad en la base de datos: {error_msg}"}
+    )
 
 # CORS configurations matching @CrossOrigin(origins = "http://localhost:3000")
 origins = [
@@ -35,6 +60,8 @@ app.add_middleware(
 app.include_router(duenos.router)
 app.include_router(mascotas.router)
 app.include_router(turnos.router)
+app.include_router(dashboard.router)
+app.include_router(historiales.router)
 
 @app.get("/")
 def read_root():

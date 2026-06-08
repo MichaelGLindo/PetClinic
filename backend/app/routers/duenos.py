@@ -14,4 +14,28 @@ def listar_duenos(db: Session = Depends(database.get_db)):
 
 @router.post("", response_model=schemas.DuenoResponse)
 def guardar_dueno(dueno: schemas.DuenoCreate, db: Session = Depends(database.get_db)):
+    db_dueno = crud.get_dueno(db, cedula=dueno.cedula)
+    if db_dueno:
+        raise HTTPException(status_code=400, detail="Ya existe un dueño con esa cédula")
     return crud.create_dueno(db=db, dueno=dueno)
+
+@router.get("/{cedula}", response_model=schemas.DuenoResponse)
+def obtener_dueno(cedula: str, db: Session = Depends(database.get_db)):
+    db_dueno = crud.get_dueno(db, cedula=cedula)
+    if not db_dueno:
+        raise HTTPException(status_code=404, detail="Dueño no encontrado")
+    return db_dueno
+
+@router.put("/{cedula}", response_model=schemas.DuenoResponse)
+def actualizar_dueno(cedula: str, dueno: schemas.DuenoUpdate, db: Session = Depends(database.get_db)):
+    db_dueno = crud.update_dueno(db, cedula=cedula, dueno=dueno)
+    if not db_dueno:
+        raise HTTPException(status_code=404, detail="Dueño no encontrado")
+    return db_dueno
+
+@router.delete("/{cedula}")
+def eliminar_dueno(cedula: str, db: Session = Depends(database.get_db)):
+    success = crud.delete_dueno(db, cedula=cedula)
+    if not success:
+        raise HTTPException(status_code=404, detail="Dueño no encontrado")
+    return {"message": "Dueño eliminado correctamente"}
