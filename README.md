@@ -1,9 +1,9 @@
 # PetClinic
-Sistema de gestión para veterinaria - Hackathon académico
+Sistema de gestión para veterinaria 
 
 # Sistema de Gestión Veterinaria
 
-Proyecto desarrollado para la Hackathon Académica del Tecnólogo en Desarrollo de Software.
+Proyecto desarrollado
 
 ## Integrantes
 
