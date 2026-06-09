@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import IntegrityError
 from app import models, database
-from app.routers import duenos, mascotas, turnos, dashboard, historiales
+from app.routers import duenos, mascotas, turnos, dashboard, historiales, auth
 
 # Create DB tables (similar to spring.jpa.hibernate.ddl-auto=update)
 try:
@@ -57,11 +57,13 @@ app.add_middleware(
 )
 
 # Include Routers
+app.include_router(auth.router)
 app.include_router(duenos.router)
 app.include_router(mascotas.router)
 app.include_router(turnos.router)
 app.include_router(dashboard.router)
 app.include_router(historiales.router)
+
 
 @app.get("/")
 def read_root():

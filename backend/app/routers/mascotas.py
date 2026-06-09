@@ -2,10 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from app import crud, schemas, database
+from app.auth_dependencies import get_current_user
 
 router = APIRouter(
     prefix="/api/mascotas",
-    tags=["mascotas"]
+    tags=["mascotas"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router.get("", response_model=List[schemas.MascotaResponse])
