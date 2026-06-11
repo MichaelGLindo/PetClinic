@@ -1,70 +1,161 @@
-# Getting Started with Create React App
+# 🏥 PetClinic — Sistema de Gestión Veterinaria
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hackathon Académico · Tecnólogo en Desarrollo de Software
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📋 Descripción
 
-### `npm start`
+Sistema web para gestión de una clínica veterinaria. Permite registrar dueños, mascotas y turnos, con autenticación JWT y control de roles (ADMIN / RECEPCIONISTA).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🗂️ Estructura del proyecto
 
-### `npm test`
+```
+petclinic/
+├── backend/
+│   └── app/
+│       ├── routers/
+│       │   ├── auth.py
+│       │   ├── duenos.py
+│       │   ├── mascotas.py
+│       │   └── turnos.py
+│       ├── crud.py
+│       ├── database.py
+│       ├── main.py
+│       ├── models.py
+│       ├── schemas.py
+│       └── security.py
+├── frontend-web/
+│   └── src/
+│       ├── pages/
+│       │   ├── Login/
+│       │   ├── Dashboard/
+│       │   ├── Duenos/
+│       │   ├── Mascotas/
+│       │   └── Turnos/
+│       └── services/
+│           └── api.js
+└── tests/
+    └── test_petclinic.py
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ⚙️ Requisitos previos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Python 3.10+
+- Node.js 18+
+- MySQL 8+
+- pip
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Cómo correr el proyecto
 
-### `npm run eject`
+### 1. Clonar el repositorio
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone <url-del-repositorio>
+cd petclinic
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. Configurar la base de datos
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Crear la base de datos en MySQL:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sql
+CREATE DATABASE petclinic;
+```
 
-## Learn More
+### 3. Configurar el backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+cd backend
+pip install -r requirements.txt
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Crear el archivo `.env` en la carpeta `backend/` con:
 
-### Code Splitting
+```
+DATABASE_URL=mysql+pymysql://root:tu_password@localhost:3306/petclinic
+SECRET_KEY=tu_clave_secreta
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Iniciar el servidor:
 
-### Analyzing the Bundle Size
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+El backend queda disponible en: `http://localhost:8080`  
+Documentación Swagger: `http://localhost:8080/docs`
 
-### Making a Progressive Web App
+### 4. Configurar el frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+cd frontend-web
+npm install
+npm start
+```
 
-### Advanced Configuration
+El frontend queda disponible en: `http://localhost:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 👤 Usuarios de prueba
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Crear usuarios desde Swagger `POST /auth/register`:
 
-### `npm run build` fails to minify
+```json
+{ "username": "admin",    "password": "admin123",  "rol": "ADMIN" }
+{ "username": "recepcion","password": "recep123",  "rol": "RECEPCIONISTA" }
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## ✅ Correr los tests
+
+```bash
+cd backend
+pip install pytest httpx
+pytest tests/test_petclinic.py -v
+```
+
+---
+
+## 🧩 Entidades del sistema
+
+| Entidad  | Campos principales                          |
+|----------|---------------------------------------------|
+| Dueño    | cedula, nombre, telefono                    |
+| Mascota  | id, nombre, especie, edad, cedula del dueño |
+| Turno    | id, fecha, motivo, id de mascota            |
+| Usuario  | username, password, rol                     |
+
+---
+
+## 🔐 Roles y permisos
+
+| Acción         | ADMIN | RECEPCIONISTA |
+|----------------|-------|---------------|
+| Ver registros  | ✅    | ✅            |
+| Crear          | ✅    | ✅            |
+| Editar         | ✅    | ✅            |
+| Eliminar       | ✅    | ❌            |
+
+---
+
+## 📌 Decisiones técnicas
+
+- **FastAPI** para el backend por su velocidad y documentación automática con Swagger
+- **JWT** para autenticación stateless con roles embebidos en el token
+- **React** para el frontend con estado local y llamadas REST directas
+- **MySQL** como base de datos relacional para mantener integridad referencial entre dueños, mascotas y turnos
+
+---
+
+## 👥 Equipo
+
+- Michael Galindo
