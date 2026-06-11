@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Gestión del sistema PetClinic" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-06-11T03:43:13.692Z" hostname="MICHAELPC" time="141.688">
+  <properties/>
+  <testcase name="1 - Registrar un dueño exitosamente" classname="Gestión del sistema PetClinic" time="36.231"/>
+  <testcase name="2 - Registrar una mascota con dueño existente" classname="Gestión del sistema PetClinic" time="20.985"/>
+  <testcase name="3 - Registrar un turno con mascota existente" classname="Gestión del sistema PetClinic" time="19.96"/>
+  <testcase name="4 - Consultar mascotas registradas" classname="Gestión del sistema PetClinic" time="12.715"/>
+  <testcase name="5 - Consultar turnos registrados" classname="Gestión del sistema PetClinic" time="11.703"/>
+  <testcase name="6 - El dashboard muestra los contadores" classname="Gestión del sistema PetClinic" time="10.369"/>
+  <testcase name="7 - Editar un dueño existente" classname="Gestión del sistema PetClinic" time="15.236"/>
+  <testcase name="8 - Cerrar sesión del sistema" classname="Gestión del sistema PetClinic" time="14.487"/>
+  <system-out><![CDATA[
+Escenario: 1 - Registrar un dueño exitosamente                                               # src/test/resources/features/petclinic.feature:11
+  ✔ Dado que el usuario ingresa al sistema PetClinic                                         # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456"                         # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando registra un dueño con cédula "99999", nombre "Juan Pérez" y teléfono "3001234567" # co.com.test.stepdefinitions.PetClinicStepDefinitions.registrarDueno(java.lang.String,java.lang.String,java.lang.String)
+  ✔ Entonces el dueño "Juan Pérez" aparece en la lista de dueños                             # co.com.test.stepdefinitions.PetClinicStepDefinitions.validarDueno(java.lang.String)
+
+Escenario: 2 - Registrar una mascota con dueño existente                                                    # src/test/resources/features/petclinic.feature:15
+  ✔ Dado que el usuario ingresa al sistema PetClinic                                                        # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456"                                        # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando registra una mascota con nombre "Firulais", especie "Perro", edad "3" y cédula del dueño "10001" # co.com.test.stepdefinitions.PetClinicStepDefinitions.registrarMascota(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+  ✔ Entonces la mascota "Firulais" aparece en la lista de mascotas                                          # co.com.test.stepdefinitions.PetClinicStepDefinitions.validarMascota(java.lang.String)
+
+Escenario: 3 - Registrar un turno con mascota existente                                             # src/test/resources/features/petclinic.feature:19
+  ✔ Dado que el usuario ingresa al sistema PetClinic                                                # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456"                                # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando agenda un turno con motivo "Vacunación anual" para la mascota con ID visible en la lista # co.com.test.stepdefinitions.PetClinicStepDefinitions.registrarTurno(java.lang.String)
+  ✔ Entonces el turno con motivo "Vacunación anual" aparece en la lista de turnos                   # co.com.test.stepdefinitions.PetClinicStepDefinitions.validarTurno(java.lang.String)
+
+Escenario: 4 - Consultar mascotas registradas                        # src/test/resources/features/petclinic.feature:23
+  ✔ Dado que el usuario ingresa al sistema PetClinic                 # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456" # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando navega a la sección de mascotas                           # co.com.test.stepdefinitions.PetClinicStepDefinitions.navegarMascotas()
+  ✔ Entonces puede ver la lista de mascotas del sistema              # co.com.test.stepdefinitions.PetClinicStepDefinitions.verListaMascotas()
+
+Escenario: 5 - Consultar turnos registrados                          # src/test/resources/features/petclinic.feature:27
+  ✔ Dado que el usuario ingresa al sistema PetClinic                 # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456" # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando navega a la sección de turnos                             # co.com.test.stepdefinitions.PetClinicStepDefinitions.navegarTurnos()
+  ✔ Entonces puede ver la lista de turnos del sistema                # co.com.test.stepdefinitions.PetClinicStepDefinitions.verListaTurnos()
+
+Escenario: 6 - El dashboard muestra los contadores                   # src/test/resources/features/petclinic.feature:31
+  ✔ Dado que el usuario ingresa al sistema PetClinic                 # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456" # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando navega al dashboard                                       # co.com.test.stepdefinitions.PetClinicStepDefinitions.navegarDashboard()
+  ✔ Entonces puede ver los contadores de dueños, mascotas y turnos   # co.com.test.stepdefinitions.PetClinicStepDefinitions.verContadores()
+
+Escenario: 7 - Editar un dueño existente                                          # src/test/resources/features/petclinic.feature:35
+  ✔ Dado que el usuario ingresa al sistema PetClinic                              # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456"              # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando edita el dueño con cédula "10001" cambiando el teléfono a "3109999999" # co.com.test.stepdefinitions.PetClinicStepDefinitions.editarDueno(java.lang.String,java.lang.String)
+  ✔ Entonces el dueño actualizado aparece en la lista con el nuevo teléfono       # co.com.test.stepdefinitions.PetClinicStepDefinitions.validarDuenoActualizado()
+
+Escenario: 8 - Cerrar sesión del sistema                             # src/test/resources/features/petclinic.feature:39
+  ✔ Dado que el usuario ingresa al sistema PetClinic                 # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
+  ✔ Y se autentica con usuario "admin2" y contraseña "Michael123456" # co.com.test.stepdefinitions.PetClinicStepDefinitions.autenticar(java.lang.String,java.lang.String)
+  ✔ Cuando hace clic en cerrar sesión                                # co.com.test.stepdefinitions.PetClinicStepDefinitions.cerrarSesion()
+  ✔ Entonces es redirigido a la pantalla de login                    # co.com.test.stepdefinitions.PetClinicStepDefinitions.validarLogin()
+]]></system-out>
+  <system-err><![CDATA[jun 10, 2026 10:43:23 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:43:52 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:44:13 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:44:33 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:44:46 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:44:57 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:45:07 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+jun 10, 2026 10:45:23 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
+]]></system-err>
+</testsuite>
