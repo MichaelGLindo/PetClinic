@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="231ab30f-65b1-4347-ac24-4fc3231ef6f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/utils/Constantes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Automatizacion/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Automatizacion/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Automatizacion/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/models/CategoriaData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/questions/ValidacionLogin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/tasks/AbrirPagina.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/tasks/AgregarProducto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/tasks/Autenticarse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/tasks/ComprarProducto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/tasks/EliminarProducto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/main/java/org/example/tasks/RegistrarUsuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/runners/CarritoRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/runners/CompraRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/runners/LoginRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/runners/RegistroRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/stepsdefinitions/CarritoStepDefinitions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/stepsdefinitions/CompraStepDefinitions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/stepsdefinitions/LoginStepsDefinitions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/java/co/com/test/stepsdefinitions/RegistroStepDefinitions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/resources/features/carrito.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/resources/features/compra.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/resources/features/login.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Automatizacion/src/test/resources/features/registro.feature" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/roles.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/roles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/routers/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/routers/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/routers/duenos.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/routers/duenos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/routers/mascotas.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/routers/mascotas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/routers/turnos.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/routers/turnos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/pages/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/pages/Dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/pages/Duenos/Duenos.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/pages/Duenos/Duenos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/pages/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/pages/Login/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/pages/Mascotas/Mascotas.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/pages/Mascotas/Mascotas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/pages/Turnos/Turnos.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/pages/Turnos/Turnos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/src/services/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/src/services/petclinicService.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Automatizacion" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3Ek6Y4RwMw3eIfgwZGtU9sZVwv5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Michael/Documents/PetClinic/src/main/java/org.example/model"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\Documents\PetClinic\src\main\java\org.example\model" />
+    </key>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="231ab30f-65b1-4347-ac24-4fc3231ef6f2" name="Changes" comment="" />
+      <created>1780710266298</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780710266298</updated>
+    </task>
+    <servers />
+  </component>
+</project>

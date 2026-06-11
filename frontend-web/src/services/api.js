@@ -10,13 +10,10 @@ const getHeaders = () => {
 
 const handleResponse = async (response) => {
   if (response.status === 204) return null;
-
   const data = await response.json().catch(() => null);
-
   if (!response.ok) {
     throw new Error(data?.message || `Error ${response.status}`);
   }
-
   return data;
 };
 

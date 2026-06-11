@@ -10,12 +10,12 @@ import Turnos from './pages/Turnos/Turnos';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: '📊' },
-  { path: '/duenos', label: 'Dueños', icon: '👤' },
-  { path: '/mascotas', label: 'Mascotas', icon: '🐾' },
-  { path: '/turnos', label: 'Turnos', icon: '📅' },
+  { path: '/duenos',    label: 'Dueños',    icon: '👤' },
+  { path: '/mascotas',  label: 'Mascotas',  icon: '🐾' },
+  { path: '/turnos',    label: 'Turnos',    icon: '📅' },
 ];
 
-function Sidebar({ onLogout }) {
+function Sidebar({ onLogout, user }) {
   const location = useLocation();
 
   return (
@@ -25,6 +25,7 @@ function Sidebar({ onLogout }) {
         <h2 className="sidebar-title">PetClinic</h2>
         <p className="sidebar-subtitle">Sistema Veterinario</p>
       </div>
+
       <nav className="sidebar-nav">
         {navItems.map((item) => (
           <Link
@@ -37,7 +38,21 @@ function Sidebar({ onLogout }) {
           </Link>
         ))}
       </nav>
+
       <div className="sidebar-footer">
+        {user && (
+          <div style={{
+            marginBottom: '0.75rem',
+            padding: '0.6rem 0.75rem',
+            background: 'rgba(255,255,255,0.06)',
+            borderRadius: '8px',
+            fontSize: '0.82rem',
+            lineHeight: 1.5,
+          }}>
+            <div style={{ fontWeight: 600 }}>👤 {user.nombre}</div>
+            <div style={{ opacity: 0.7 }}>🔑 {user.rol}</div>
+          </div>
+        )}
         <button className="logout-btn" onClick={onLogout}>
           🚪 Cerrar Sesión
         </button>
@@ -46,17 +61,17 @@ function Sidebar({ onLogout }) {
   );
 }
 
-function AppLayout({ onLogout }) {
+function AppLayout({ onLogout, user }) {
   return (
     <div className="app-layout">
-      <Sidebar onLogout={onLogout} />
+      <Sidebar onLogout={onLogout} user={user} />
       <main className="main-content">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/duenos" element={<Duenos />} />
-          <Route path="/mascotas" element={<Mascotas />} />
-          <Route path="/turnos" element={<Turnos />} />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/duenos"    element={<Duenos />} />
+          <Route path="/mascotas"  element={<Mascotas />} />
+          <Route path="/turnos"    element={<Turnos />} />
+          <Route path="*"          element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </main>
     </div>
@@ -65,27 +80,34 @@ function AppLayout({ onLogout }) {
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
     if (token) {
       setIsLoggedIn(true);
+      if (storedUser) setUser(JSON.parse(storedUser));
     }
   }, []);
 
   const handleLogin = () => {
+    const storedUser = localStorage.getItem('user');
     setIsLoggedIn(true);
+    if (storedUser) setUser(JSON.parse(storedUser));
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setIsLoggedIn(false);
+    setUser(null);
   };
 
   return (
     <BrowserRouter>
       {isLoggedIn ? (
-        <AppLayout onLogout={handleLogout} />
+        <AppLayout onLogout={handleLogout} user={user} />
       ) : (
         <Routes>
           <Route path="*" element={<Login onLogin={handleLogin} />} />

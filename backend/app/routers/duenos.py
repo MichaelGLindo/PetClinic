@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from typing import List
 from app import crud, schemas, database
 from app.auth_dependencies import get_current_user
+from app.roles import require_role
+from fastapi import APIRouter, Depends, HTTPException
 
 router = APIRouter(
     prefix="/api/duenos",
@@ -36,8 +38,19 @@ def actualizar_dueno(cedula: str, dueno: schemas.DuenoUpdate, db: Session = Depe
     return db_dueno
 
 @router.delete("/{cedula}")
-def eliminar_dueno(cedula: str, db: Session = Depends(database.get_db)):
+def eliminar_dueno(
+    cedula: str,
+    db: Session = Depends(database.get_db),
+    user=Depends(require_role("ADMIN"))
+):
     success = crud.delete_dueno(db, cedula=cedula)
+
     if not success:
-        raise HTTPException(status_code=404, detail="Dueño no encontrado")
-    return {"message": "Dueño eliminado correctamente"}
+        raise HTTPException(
+            status_code=404,
+            detail="Dueño no encontrado"
+        )
+
+    return {
+        "message": "Dueño eliminado correctamente"
+    }

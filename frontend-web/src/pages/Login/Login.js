@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './Login.css';
 
 function Login({ onLogin }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -13,26 +13,31 @@ function Login({ onLogin }) {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:8080/api/auth/login', {
+      const res = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       if (!res.ok) throw new Error('Credenciales incorrectas');
 
       const data = await res.json();
-      if (data?.token) localStorage.setItem('token', data.token);
+
+      // Tu backend devuelve "access_token"
+      const token = data.access_token;
+      localStorage.setItem('token', token);
+
+      // Decodificar el JWT para sacar nombre y rol
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      localStorage.setItem('user', JSON.stringify({
+        nombre: payload.sub,
+        rol: payload.rol,
+      }));
+
       onLogin();
 
     } catch (err) {
-      // Si tu backend no tiene /auth/login aún, permite entrar igual
-      if (email && password) {
-        localStorage.setItem('token', 'mock-token');
-        onLogin();
-      } else {
-        setError('Ingresa tu correo y contraseña');
-      }
+      setError(err.message || 'Error al iniciar sesión');
     } finally {
       setLoading(false);
     }
@@ -52,13 +57,13 @@ function Login({ onLogin }) {
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label className="form-label">Correo electrónico</label>
+            <label className="form-label">Usuario</label>
             <input
               className="form-input"
-              type="email"
-              placeholder="veterinario@petclinic.com"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              type="text"
+              placeholder="michael"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
               required
             />
           </div>

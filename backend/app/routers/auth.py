@@ -40,9 +40,9 @@ def register(
     nuevo = Usuario(
         username=usuario.username,
         password=hash_password(
-            usuario.password,
+            usuario.password),
             rol=usuario.rol
-        )
+        
     )
 
     db.add(nuevo)
@@ -77,12 +77,10 @@ def login(
             detail="Credenciales invalidas"
         )
 
-    token = create_access_token(
-        {
-            "sub": user.username,
-            "rol": user.rol
-         }
-    )
+    token = create_access_token({
+        "sub": user.username,
+        "rol": user.rol   
+    })
 
     return {
         "access_token": token,

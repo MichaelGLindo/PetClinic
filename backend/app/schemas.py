@@ -112,7 +112,7 @@ class HistorialClinicoResponse(BaseModel):
 class UsuarioCreate(BaseModel):
     username: str
     password: str
-    rol: str = "RECEPCIONISTA"
+    rol: str 
 
 
 class UsuarioLogin(BaseModel):

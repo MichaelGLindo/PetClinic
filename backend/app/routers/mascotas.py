@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from app import crud, schemas, database
 from app.auth_dependencies import get_current_user
+from app.roles import require_role
 
 router = APIRouter(
     prefix="/api/mascotas",
@@ -70,8 +71,19 @@ def actualizar_mascota(id: int, mascota: schemas.MascotaUpdate, db: Session = De
     return db_mascota
 
 @router.delete("/{id}")
-def eliminar_mascota(id: int, db: Session = Depends(database.get_db)):
+def eliminar_mascota(
+    id: int,
+    db: Session = Depends(database.get_db),
+    admin = Depends(require_role("ADMIN"))
+):
     success = crud.delete_mascota(db, id=id)
+
     if not success:
-        raise HTTPException(status_code=404, detail="Mascota no encontrada")
-    return {"message": "Mascota eliminada correctamente"}
+        raise HTTPException(
+            status_code=404,
+            detail="Mascota no encontrada"
+        )
+
+    return {
+        "message": "Mascota eliminada correctamente"
+    }

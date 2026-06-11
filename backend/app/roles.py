@@ -1,13 +1,18 @@
 from fastapi import Depends, HTTPException
-from jose import jwt
+from fastapi.security import HTTPAuthorizationCredentials
+from jose import jwt, JWTError
 
-from app.auth_dependencies import oauth2_scheme
+from app.auth_dependencies import security
 from app.security import SECRET_KEY, ALGORITHM
 
 
 def require_role(role: str):
 
-    def role_checker(token: str = Depends(oauth2_scheme)):
+    def role_checker(
+        credentials: HTTPAuthorizationCredentials = Depends(security)
+    ):
+
+        token = credentials.credentials
 
         try:
             payload = jwt.decode(
@@ -16,20 +21,25 @@ def require_role(role: str):
                 algorithms=[ALGORITHM]
             )
 
-            user_role = payload.get("rol")
+            print(payload)  # temporal para pruebas
 
-            if user_role != role:
-                raise HTTPException(
-                    status_code=403,
-                    detail="No autorizado"
-                )
-
-            return payload
-
-        except Exception:
+        except JWTError:
             raise HTTPException(
                 status_code=401,
                 detail="Token inválido"
             )
+
+        user_role = payload.get("rol")
+
+        print("ROL TOKEN:", user_role)
+        print("ROL REQUERIDO:", role)
+
+        if user_role != role:
+            raise HTTPException(
+                status_code=403,
+                detail="No autorizado"
+            )
+
+        return payload
 
     return role_checker

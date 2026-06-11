@@ -51,4 +51,4 @@ class Usuario(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(100), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
-    rol = Column(String(50), nullable=False, default="RECEPCIONISTA")
+    rol = Column(String(50), nullable=False)
