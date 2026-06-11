@@ -1,4 +1,4 @@
-const API_BASE = 'https://petclinic-dtoc.onrender.com/api';
+const API_BASE = "https://petclinic-dtoc.onrender.com";
 
 const getHeaders = () => {
   const token = localStorage.getItem('token');

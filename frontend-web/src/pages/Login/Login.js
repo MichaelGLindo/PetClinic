@@ -13,11 +13,17 @@ function Login({ onLogin }) {
     setError('');
 
     try {
-      const res = await fetch('https://petclinic-dtoc.onrender.com/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
+      const res = await fetch(
+  "https://petclinic-dtoc.onrender.com/auth/login",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  }
+);
+  console.log("STATUS:", res.status);
+      const responseText = await res.text();
+      console.log("RESPONSE:", responseText);
 
       if (!res.ok) throw new Error('Credenciales incorrectas');
 
