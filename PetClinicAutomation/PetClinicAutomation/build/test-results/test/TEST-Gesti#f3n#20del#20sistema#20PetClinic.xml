@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Gestión del sistema PetClinic" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-06-11T04:00:15.835Z" hostname="MICHAELPC" time="188.997">
+<testsuite name="Gestión del sistema PetClinic" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-06-11T21:29:00.027Z" hostname="MICHAELPC" time="456.908">
   <properties/>
-  <testcase name="1 - Registrar un dueño exitosamente" classname="Gestión del sistema PetClinic" time="49.527"/>
-  <testcase name="2 - Registrar una mascota con dueño existente" classname="Gestión del sistema PetClinic" time="29.169"/>
-  <testcase name="3 - Registrar un turno con mascota existente" classname="Gestión del sistema PetClinic" time="25.761"/>
-  <testcase name="4 - Consultar mascotas registradas" classname="Gestión del sistema PetClinic" time="13.218"/>
-  <testcase name="5 - Consultar turnos registrados" classname="Gestión del sistema PetClinic" time="14.068"/>
-  <testcase name="6 - El dashboard muestra los contadores" classname="Gestión del sistema PetClinic" time="23.789"/>
-  <testcase name="7 - Editar un dueño existente" classname="Gestión del sistema PetClinic" time="18.564"/>
-  <testcase name="8 - Cerrar sesión del sistema" classname="Gestión del sistema PetClinic" time="14.9"/>
+  <testcase name="1 - Registrar un dueño exitosamente" classname="Gestión del sistema PetClinic" time="35.671"/>
+  <testcase name="2 - Registrar una mascota con dueño existente" classname="Gestión del sistema PetClinic" time="27.316"/>
+  <testcase name="3 - Registrar un turno con mascota existente" classname="Gestión del sistema PetClinic" time="66.024"/>
+  <testcase name="4 - Consultar mascotas registradas" classname="Gestión del sistema PetClinic" time="107.707"/>
+  <testcase name="5 - Consultar turnos registrados" classname="Gestión del sistema PetClinic" time="76.923"/>
+  <testcase name="6 - El dashboard muestra los contadores" classname="Gestión del sistema PetClinic" time="27.608"/>
+  <testcase name="7 - Editar un dueño existente" classname="Gestión del sistema PetClinic" time="54.148"/>
+  <testcase name="8 - Cerrar sesión del sistema" classname="Gestión del sistema PetClinic" time="61.509"/>
   <system-out><![CDATA[
 Escenario: 1 - Registrar un dueño exitosamente                                               # src/test/resources/features/petclinic.feature:11
   ✔ Dado que el usuario ingresa al sistema PetClinic                                         # co.com.test.stepdefinitions.PetClinicStepDefinitions.abrirSistema()
@@ -58,21 +58,21 @@ Escenario: 8 - Cerrar sesión del sistema                             # src/test
   ✔ Cuando hace clic en cerrar sesión                                # co.com.test.stepdefinitions.PetClinicStepDefinitions.cerrarSesion()
   ✔ Entonces es redirigido a la pantalla de login                    # co.com.test.stepdefinitions.PetClinicStepDefinitions.validarLogin()
 ]]></system-out>
-  <system-err><![CDATA[jun 10, 2026 11:00:32 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+  <system-err><![CDATA[jun 11, 2026 4:29:09 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:01:08 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:29:38 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:01:37 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:30:05 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:02:03 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:31:28 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:02:16 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:33:04 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:02:30 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:34:18 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:02:53 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:34:47 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
-jun 10, 2026 11:03:12 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+jun 11, 2026 4:35:41 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 ADVERTENCIA: Unable to find an exact match for CDP version 149, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 149
 ]]></system-err>
 </testsuite>

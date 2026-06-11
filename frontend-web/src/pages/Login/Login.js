@@ -13,27 +13,19 @@ function Login({ onLogin }) {
     setError('');
 
     try {
-      const res = await fetch(
-  "https://petclinic-dtoc.onrender.com/auth/login",
-  {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
-  }
-);
-  console.log("STATUS:", res.status);
-      const responseText = await res.text();
-      console.log("RESPONSE:", responseText);
+      const res = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
 
       if (!res.ok) throw new Error('Credenciales incorrectas');
 
       const data = await res.json();
 
-      // Tu backend devuelve "access_token"
       const token = data.access_token;
       localStorage.setItem('token', token);
 
-      // Decodificar el JWT para sacar nombre y rol
       const payload = JSON.parse(atob(token.split('.')[1]));
       localStorage.setItem('user', JSON.stringify({
         nombre: payload.sub,
