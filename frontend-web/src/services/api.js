@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080/api';
+const API_BASE = 'https://petclinic-dtoc.onrender.com/api';
 
 const getHeaders = () => {
   const token = localStorage.getItem('token');

@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea0df93-0470-4b56-ae51-a0c77b6b4e71" name="Changes" comment="" />
+    <list default="true" id="2ea0df93-0470-4b56-ae51-a0c77b6b4e71" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/8.14/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/classes/Gesti#f3n#20del#20sistema#20PetClinic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/classes/co.com.test.runners.PetClinicRunner.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/css/base-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/js/report.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/packages/co.com.test.runners.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/reports/tests/test/packages/default-package.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/test-results/test/TEST-Gesti#f3n#20del#20sistema#20PetClinic.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/test-results/test/TEST-co.com.test.runners.PetClinicRunner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/test-results/test/binary/output.bin.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/test-results/test/binary/results.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/target/cucumber-reports/cucumber.json" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/target/cucumber-reports/cucumber.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetClinicAutomation/target/site/serenity/browser-chrome.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PetClinicAutomation/target/site/serenity/browser-chrome.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,9 +63,12 @@
       </state>
     </system>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="3ExewvpW00mmNeCp6balE2kk6dR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -51,8 +82,9 @@
     "Gradle.Tests in 'PetClinicAutomation'.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Michael/Downloads/PetClinicAutomation",
+    "last_opened_file_path": "C:/Users/Michael/Documents/PetClinic/PetClinicAutomation",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
