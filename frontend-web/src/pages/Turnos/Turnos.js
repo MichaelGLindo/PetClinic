@@ -9,9 +9,19 @@ function Turnos() {
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [editandoId, setEditandoId] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     cargarTurnos();
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      try {
+        const u = JSON.parse(userStr);
+        setIsAdmin(u.rol === "ADMIN");
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }, []);
 
   const cargarTurnos = async () => {
@@ -162,10 +172,12 @@ function Turnos() {
                       style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.1rem", marginRight: "0.5rem" }}>
                       ✏️
                     </button>
-                    <button onClick={() => eliminarTurno(t.id)}
-                      style={{ background: "none", border: "none", cursor: "pointer", color: "#e74c3c", fontSize: "1.1rem" }}>
-                      🗑️
-                    </button>
+                    {isAdmin && (
+                      <button onClick={() => eliminarTurno(t.id)}
+                        style={{ background: "none", border: "none", cursor: "pointer", color: "#e74c3c", fontSize: "1.1rem" }}>
+                        🗑️
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

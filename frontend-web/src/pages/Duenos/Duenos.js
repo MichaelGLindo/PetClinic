@@ -9,9 +9,19 @@ function Duenos() {
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [editandoId, setEditandoId] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     cargarDuenos();
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      try {
+        const u = JSON.parse(userStr);
+        setIsAdmin(u.rol === "ADMIN");
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }, []);
 
   const cargarDuenos = async () => {
@@ -159,10 +169,12 @@ function Duenos() {
                       style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.1rem", marginRight: "0.5rem" }}>
                       ✏️
                     </button>
-                    <button onClick={() => eliminarDueno(d.cedula)}
-                      style={{ background: "none", border: "none", cursor: "pointer", color: "#e74c3c", fontSize: "1.1rem" }}>
-                      🗑️
-                    </button>
+                    {isAdmin && (
+                      <button onClick={() => eliminarDueno(d.cedula)}
+                        style={{ background: "none", border: "none", cursor: "pointer", color: "#e74c3c", fontSize: "1.1rem" }}>
+                        🗑️
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

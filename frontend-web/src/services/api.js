@@ -130,3 +130,21 @@ export const deleteTurno = async (id) => {
   });
   return handleResponse(response);
 };
+
+// ========================
+// Historiales
+// ========================
+export const getHistoriales = async (mascotaId = null) => {
+  const url = mascotaId ? `${API_BASE}/historiales?mascota_id=${mascotaId}` : `${API_BASE}/historiales`;
+  const response = await fetch(url, { headers: getHeaders() });
+  return handleResponse(response);
+};
+
+export const createHistorial = async (historial) => {
+  const response = await fetch(`${API_BASE}/historiales`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(historial),
+  });
+  return handleResponse(response);
+};

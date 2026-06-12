@@ -7,16 +7,21 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Duenos from './pages/Duenos/Duenos';
 import Mascotas from './pages/Mascotas/Mascotas';
 import Turnos from './pages/Turnos/Turnos';
-
-const navItems = [
-  { path: '/dashboard', label: 'Dashboard', icon: '📊' },
-  { path: '/duenos',    label: 'Dueños',    icon: '👤' },
-  { path: '/mascotas',  label: 'Mascotas',  icon: '🐾' },
-  { path: '/turnos',    label: 'Turnos',    icon: '📅' },
-];
+import ClientPortal from './pages/ClientPortal/ClientPortal';
 
 function Sidebar({ onLogout, user }) {
   const location = useLocation();
+  const isAdmin = user?.rol === 'ADMIN';
+  const navItems = isAdmin 
+    ? [
+        { path: '/dashboard', label: 'Dashboard', icon: '📊' },
+        { path: '/duenos',    label: 'Dueños',    icon: '👤' },
+        { path: '/mascotas',  label: 'Mascotas',  icon: '🐾' },
+        { path: '/turnos',    label: 'Turnos',    icon: '📅' },
+      ]
+    : [
+        { path: '/portal',    label: 'Mi Portal', icon: '🏥' },
+      ];
 
   return (
     <aside className="sidebar">
@@ -50,7 +55,7 @@ function Sidebar({ onLogout, user }) {
             lineHeight: 1.5,
           }}>
             <div style={{ fontWeight: 600 }}>👤 {user.nombre}</div>
-            <div style={{ opacity: 0.7 }}>🔑 {user.rol}</div>
+            <div style={{ opacity: 0.7 }}>🔑 {user.rol === 'ADMIN' ? 'Administrador' : 'Propietario'}</div>
           </div>
         )}
         <button className="logout-btn" onClick={onLogout}>
@@ -62,16 +67,27 @@ function Sidebar({ onLogout, user }) {
 }
 
 function AppLayout({ onLogout, user }) {
+  const isAdmin = user?.rol === 'ADMIN';
+
   return (
     <div className="app-layout">
       <Sidebar onLogout={onLogout} user={user} />
       <main className="main-content">
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/duenos"    element={<Duenos />} />
-          <Route path="/mascotas"  element={<Mascotas />} />
-          <Route path="/turnos"    element={<Turnos />} />
-          <Route path="*"          element={<Navigate to="/dashboard" replace />} />
+          {isAdmin ? (
+            <>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/duenos"    element={<Duenos />} />
+              <Route path="/mascotas"  element={<Mascotas />} />
+              <Route path="/turnos"    element={<Turnos />} />
+              <Route path="*"          element={<Navigate to="/dashboard" replace />} />
+            </>
+          ) : (
+            <>
+              <Route path="/portal"    element={<ClientPortal />} />
+              <Route path="*"          element={<Navigate to="/portal" replace />} />
+            </>
+          )}
         </Routes>
       </main>
     </div>

@@ -8,8 +8,22 @@ from app.routers import duenos, mascotas, turnos, dashboard, historiales, auth
 # Create DB tables (similar to spring.jpa.hibernate.ddl-auto=update)
 try:
     models.Base.metadata.create_all(bind=database.engine)
+    # Check if dueno_cedula column exists in usuarios table and add it if missing
+    from sqlalchemy import inspect, text
+    inspector = inspect(database.engine)
+    if "usuarios" in inspector.get_table_names():
+        columns = [c["name"] for c in inspector.get_columns("usuarios")]
+        if "dueno_cedula" not in columns:
+            with database.engine.connect() as conn:
+                conn.execute(text("ALTER TABLE usuarios ADD COLUMN dueno_cedula VARCHAR(255) NULL"))
+                try:
+                    conn.execute(text("ALTER TABLE usuarios ADD CONSTRAINT fk_usuarios_duenos FOREIGN KEY (dueno_cedula) REFERENCES duenos(cedula) ON DELETE SET NULL"))
+                except Exception as fk_err:
+                    print(f"FK constraint warning: {fk_err}")
+                conn.commit()
+                print("Successfully added dueno_cedula column to usuarios table.")
 except Exception as e:
-    print(f"Warning: Could not create tables on startup. Make sure your MySQL database server is running and configured correctly: {e}")
+    print(f"Warning: Could not create/migrate tables on startup. Make sure your MySQL database server is running: {e}")
 
 app = FastAPI(
     title="PetClinic API",

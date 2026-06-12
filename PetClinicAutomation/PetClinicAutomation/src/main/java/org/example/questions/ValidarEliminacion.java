@@ -17,6 +17,10 @@ public class ValidarEliminacion implements Question<Boolean> {
         return new ValidarEliminacion(nombre);
     }
 
+    public static ValidarEliminacion deDueno(String nombre) {
+        return new ValidarEliminacion(nombre);
+    }
+
     @Override
     public Boolean answeredBy(Actor actor) {
         try {

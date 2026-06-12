@@ -120,6 +120,14 @@ class UsuarioLogin(BaseModel):
     password: str
 
 
+class ClientRegister(BaseModel):
+    username: str
+    password: str
+    cedula: str
+    nombre: str
+    telefono: str
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
