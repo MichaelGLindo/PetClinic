@@ -56,21 +56,6 @@ El sistema permite gestionar propietarios, mascotas y turnos médicos desde una 
 
 ---
 
-## 🖥️ Capturas de Pantalla
-
-### Login
-
-![Login](docs/login.png)
-
-### Registro de Propietarios
-
-![Registro](docs/registro.png)
-
-### Dashboard
-
-![Dashboard](docs/dashboard.png)
-
----
 
 ## 🏗️ Arquitectura
 
