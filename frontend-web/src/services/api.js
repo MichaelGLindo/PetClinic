@@ -105,6 +105,16 @@ export const getTurnos = async () => {
   return handleResponse(response);
 };
 
+export const getTurnosHoy = async () => {
+  const response = await fetch(`${API_BASE}/turnos/hoy`, { headers: getHeaders() });
+  return handleResponse(response);
+};
+
+export const getTurnosPorFecha = async (fecha) => {
+  const response = await fetch(`${API_BASE}/turnos/por-fecha?fecha=${fecha}`, { headers: getHeaders() });
+  return handleResponse(response);
+};
+
 export const createTurno = async (turno) => {
   const response = await fetch(`${API_BASE}/turnos`, {
     method: 'POST',

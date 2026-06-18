@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getTurnos, createTurno, updateTurno, deleteTurno } from "../../services/api";
+import { getTurnos, getTurnosPorFecha, createTurno, updateTurno, deleteTurno } from "../../services/api";
 
 const empty = { fecha: "", motivo: "", mascotaId: "" };
 
@@ -10,23 +10,17 @@ function Turnos() {
   const [mensaje, setMensaje] = useState("");
   const [editandoId, setEditandoId] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [fechaFiltro, setFechaFiltro] = useState("");
 
-  useEffect(() => {
-    cargarTurnos();
-    const userStr = localStorage.getItem("user");
-    if (userStr) {
-      try {
-        const u = JSON.parse(userStr);
-        setIsAdmin(u.rol === "ADMIN");
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  }, []);
-
-  const cargarTurnos = async () => {
+  const cargarTurnos = async (fecha) => {
     try {
-      const data = await getTurnos();
+      const f = fecha !== undefined ? fecha : fechaFiltro;
+      let data;
+      if (f) {
+        data = await getTurnosPorFecha(f);
+      } else {
+        data = await getTurnos();
+      }
       setLista(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
@@ -50,7 +44,7 @@ function Turnos() {
         setMensaje("✅ Turno agendado correctamente");
       }
       setTurno(empty);
-      cargarTurnos();
+      cargarTurnos(fechaFiltro);
     } catch (err) {
       setMensaje("❌ Error al guardar: " + err.message);
     } finally {
@@ -78,11 +72,31 @@ function Turnos() {
     if (!window.confirm("¿Eliminar este turno?")) return;
     try {
       await deleteTurno(id);
-      cargarTurnos();
+      cargarTurnos(fechaFiltro);
     } catch (err) {
       alert("Error al eliminar: " + err.message);
     }
   };
+
+  const cambiarFecha = (e) => {
+    setFechaFiltro(e.target.value);
+  };
+
+  useEffect(() => {
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      try {
+        const u = JSON.parse(userStr);
+        setIsAdmin(u.rol === "ADMIN");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    cargarTurnos(fechaFiltro);
+  }, [fechaFiltro]);
 
   return (
     <div>
@@ -146,9 +160,27 @@ function Turnos() {
       </div>
 
       <div className="card">
-        <h2 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "1rem" }}>
-          Lista de Turnos ({lista.length})
-        </h2>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+          <h2 style={{ fontSize: "1rem", fontWeight: 700, margin: 0 }}>
+            {fechaFiltro ? `Turnos del ${new Date(fechaFiltro + "T12:00:00").toLocaleDateString("es-CO")}` : "Todos los Turnos"} ({lista.length})
+          </h2>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-muted)" }}>Filtrar por fecha:</label>
+            <input
+              className="form-input"
+              type="date"
+              value={fechaFiltro}
+              onChange={cambiarFecha}
+              style={{ padding: "0.4rem 0.75rem", fontSize: "0.85rem" }}
+            />
+            {fechaFiltro && (
+              <button onClick={() => setFechaFiltro("")}
+                style={{ padding: "0.4rem 0.75rem", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", background: "none", cursor: "pointer", fontWeight: 600, fontSize: "0.85rem" }}>
+                Ver todos
+              </button>
+            )}
+          </div>
+        </div>
         {lista.length === 0 ? (
           <p style={{ color: "var(--text-muted)" }}>No hay turnos agendados.</p>
         ) : (
@@ -158,6 +190,7 @@ function Turnos() {
                 <th style={th}>Fecha</th>
                 <th style={th}>Motivo</th>
                 <th style={th}>Mascota</th>
+                <th style={th}>Dueño</th>
                 <th style={th}>Acciones</th>
               </tr>
             </thead>
@@ -167,6 +200,7 @@ function Turnos() {
                   <td style={td}>{t.fecha ? new Date(t.fecha).toLocaleString("es-CO") : "-"}</td>
                   <td style={td}>{t.motivo}</td>
                   <td style={td}>{t.mascota?.id} — {t.mascota?.nombre}</td>
+                  <td style={td}>{t.mascota?.dueno?.nombre || "-"}</td>
                   <td style={td}>
                     <button onClick={() => editarTurno(t)}
                       style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.1rem", marginRight: "0.5rem" }}>

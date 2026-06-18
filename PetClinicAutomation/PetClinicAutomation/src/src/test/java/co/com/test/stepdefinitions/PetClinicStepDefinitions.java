@@ -70,16 +70,13 @@ public class PetClinicStepDefinitions {
         usuario.should(seeThat(ValidarDueno.conNombre(nombre), is(true)));
     }
 
-    // ─────────────────────────────────────────
-    // TEST 2 - Registrar mascota
-    // ─────────────────────────────────────────
+
     @Cuando("registra una mascota con nombre {string}, especie {string}, edad {string} y cédula del dueño {string}")
     public void registrarMascota(String nombre, String especie, String edad, String cedula) {
         usuario.attemptsTo(
             RegistrarMascota.con(new MascotaData(nombre, especie, edad, cedula))
         );
         esperar(1500);
-        // Capturar el ID de la primera mascota registrada en la tabla
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("tbody tr")));

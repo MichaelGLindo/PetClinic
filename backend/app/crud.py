@@ -115,6 +115,31 @@ def get_turnos(db: Session, mascota_id: int = None):
         query = query.filter(models.Turno.mascota_id == mascota_id)
     return query.all()
 
+def get_turnos_hoy(db: Session, mascota_ids: list[int] = None):
+    from zoneinfo import ZoneInfo
+    tz_co = ZoneInfo("America/Bogota")
+    ahora = datetime.now(tz_co).replace(tzinfo=None)
+    inicio = datetime.combine(ahora.date(), time.min)
+    fin = datetime.combine(ahora.date(), time.max)
+    query = db.query(models.Turno).filter(
+        models.Turno.fecha >= inicio,
+        models.Turno.fecha <= fin
+    )
+    if mascota_ids is not None:
+        query = query.filter(models.Turno.mascota_id.in_(mascota_ids))
+    return query.order_by(models.Turno.fecha.asc()).all()
+
+def get_turnos_por_fecha(db: Session, fecha: date, mascota_ids: list[int] = None):
+    inicio = datetime.combine(fecha, time.min)
+    fin = datetime.combine(fecha, time.max)
+    query = db.query(models.Turno).filter(
+        models.Turno.fecha >= inicio,
+        models.Turno.fecha <= fin
+    )
+    if mascota_ids is not None:
+        query = query.filter(models.Turno.mascota_id.in_(mascota_ids))
+    return query.order_by(models.Turno.fecha.asc()).all()
+
 def get_turno(db: Session, id: int):
     return db.query(models.Turno).filter(models.Turno.id == id).first()
 

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from datetime import datetime
+from datetime import datetime, date
 from app import crud, schemas, database, models
 from app.auth_dependencies import get_current_user
 from app.roles import require_role
@@ -40,12 +40,16 @@ def guardar_turno(
     db: Session = Depends(database.get_db),
     current_user = Depends(get_current_user)
 ):
-    pet_id = turno.mascota_id if turno.mascota_id is not None else turno.mascotaId
-    if not pet_id and turno.mascota:
+    pet_id = None
+    if turno.mascota_id is not None:
+        pet_id = int(turno.mascota_id)
+    elif turno.mascotaId is not None:
+        pet_id = int(turno.mascotaId)
+    elif turno.mascota:
         if isinstance(turno.mascota, dict):
-            pet_id = turno.mascota.get("id")
+            pet_id = int(turno.mascota.get("id", 0))
         elif hasattr(turno.mascota, "id"):
-            pet_id = getattr(turno.mascota, "id")
+            pet_id = int(getattr(turno.mascota, "id"))
 
     if not pet_id:
         raise HTTPException(status_code=400, detail="Debe especificar una mascota")
@@ -76,6 +80,33 @@ def listar_turnos_proximos(
             models.Turno.fecha >= now
         ).order_by(models.Turno.fecha.asc()).all()
     return crud.get_turnos_proximos(db)
+
+@router.get("/por-fecha", response_model=List[schemas.TurnoResponse])
+def listar_turnos_por_fecha(
+    fecha: date,
+    db: Session = Depends(database.get_db),
+    current_user = Depends(get_current_user)
+):
+    if current_user.rol != "ADMIN":
+        my_pets = db.query(models.Mascota).filter(models.Mascota.dueno_cedula == current_user.dueno_cedula).all()
+        my_pet_ids = [p.id for p in my_pets]
+        if not my_pet_ids:
+            return []
+        return crud.get_turnos_por_fecha(db, fecha=fecha, mascota_ids=my_pet_ids)
+    return crud.get_turnos_por_fecha(db, fecha=fecha)
+
+@router.get("/hoy", response_model=List[schemas.TurnoResponse])
+def listar_turnos_hoy(
+    db: Session = Depends(database.get_db),
+    current_user = Depends(get_current_user)
+):
+    if current_user.rol != "ADMIN":
+        my_pets = db.query(models.Mascota).filter(models.Mascota.dueno_cedula == current_user.dueno_cedula).all()
+        my_pet_ids = [p.id for p in my_pets]
+        if not my_pet_ids:
+            return []
+        return crud.get_turnos_hoy(db, mascota_ids=my_pet_ids)
+    return crud.get_turnos_hoy(db)
 
 @router.get("/{id}", response_model=schemas.TurnoResponse)
 def obtener_turno(

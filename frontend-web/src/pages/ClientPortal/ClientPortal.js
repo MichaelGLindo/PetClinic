@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getMascotas, createMascota, getTurnos, createTurno, getHistoriales } from "../../services/api";
+import { getMascotas, createMascota, getTurnos, getTurnosPorFecha, createTurno, getHistoriales } from "../../services/api";
 
 function ClientPortal() {
   const [activeTab, setActiveTab] = useState("mascotas");
@@ -17,6 +17,39 @@ function ClientPortal() {
   // Form States
   const [nuevaMascota, setNuevaMascota] = useState({ nombre: "", especie: "", edad: "" });
   const [nuevoTurno, setNuevoTurno] = useState({ fecha: "", motivo: "", mascotaId: "" });
+  const [fechaFiltro, setFechaFiltro] = useState("");
+
+  const cargarTurnos = async (fecha) => {
+    try {
+      const f = fecha !== undefined ? fecha : fechaFiltro;
+      let data;
+      if (f) {
+        data = await getTurnosPorFecha(f);
+      } else {
+        data = await getTurnos();
+      }
+      setTurnos(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error("Error al cargar turnos:", err);
+    }
+  };
+
+  const cargarDatos = async (fecha) => {
+    setLoading(true);
+    try {
+      const petsData = await getMascotas();
+      setMascotas(Array.isArray(petsData) ? petsData : []);
+
+      await cargarTurnos(fecha);
+
+      const historyData = await getHistoriales();
+      setHistoriales(Array.isArray(historyData) ? historyData : []);
+    } catch (err) {
+      console.error("Error al cargar datos:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const userStr = localStorage.getItem("user");
@@ -27,26 +60,9 @@ function ClientPortal() {
     }
   }, []);
 
-  const cargarDatos = async () => {
-    setLoading(true);
-    try {
-      // Fetch user's pets (since backend automatically filters pets by dueno_cedula of the logged in user)
-      const petsData = await getMascotas();
-      setMascotas(Array.isArray(petsData) ? petsData : []);
-
-      // Fetch user's appointments (backend automatically filters turnos by pets owned by the logged in user)
-      const turnosData = await getTurnos();
-      setTurnos(Array.isArray(turnosData) ? turnosData : []);
-
-      // Fetch user's medical history (backend automatically filters historiales by pets owned by the logged in user)
-      const historyData = await getHistoriales();
-      setHistoriales(Array.isArray(historyData) ? historyData : []);
-    } catch (err) {
-      console.error("Error al cargar datos:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    cargarTurnos(fechaFiltro);
+  }, [fechaFiltro]);
 
   const handleMascotaChange = (e) => {
     setNuevaMascota({ ...nuevaMascota, [e.target.name]: e.target.value });
@@ -101,6 +117,10 @@ function ClientPortal() {
       setLoading(false);
       setTimeout(() => setMensaje(""), 3000);
     }
+  };
+
+  const cambiarFechaTurnos = (e) => {
+    setFechaFiltro(e.target.value);
   };
 
   return (
@@ -301,7 +321,27 @@ function ClientPortal() {
 
           {/* List of appointments */}
           <div className="card">
-            <h2 style={{ fontSize: "1.1rem", fontWeight: 700, marginBottom: "1rem" }}>Tus Turnos Programados</h2>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+                {fechaFiltro ? `Turnos del ${new Date(fechaFiltro + "T12:00:00").toLocaleDateString("es-CO")}` : "Todos tus Turnos"}
+              </h2>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-muted)" }}>Filtrar por fecha:</label>
+                <input
+                  className="form-input"
+                  type="date"
+                  value={fechaFiltro}
+                  onChange={cambiarFechaTurnos}
+                  style={{ padding: "0.4rem 0.75rem", fontSize: "0.85rem", height: "2.2rem" }}
+                />
+                {fechaFiltro && (
+                  <button onClick={() => setFechaFiltro("")}
+                    style={{ padding: "0.4rem 0.75rem", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", background: "none", cursor: "pointer", fontWeight: 600, fontSize: "0.82rem" }}>
+                    Ver todos
+                  </button>
+                )}
+              </div>
+            </div>
             {turnos.length === 0 ? (
               <p style={{ color: "var(--text-muted)" }}>No tienes turnos agendados.</p>
             ) : (
@@ -309,6 +349,7 @@ function ClientPortal() {
                 <thead>
                   <tr style={{ borderBottom: "2px solid var(--border-color)" }}>
                     <th style={th}>Mascota</th>
+                    <th style={th}>Dueño</th>
                     <th style={th}>Fecha y Hora</th>
                     <th style={th}>Motivo</th>
                     <th style={th}>Estado</th>
@@ -317,7 +358,8 @@ function ClientPortal() {
                 <tbody>
                   {turnos.map((t) => (
                     <tr key={t.id} style={{ borderBottom: "1px solid var(--border-color)" }}>
-                      <td style={td}>{t.mascota ? t.mascota.nombre : "Sin mascota"}</td>
+                      <td style={td}>{t.mascota ? `${t.mascota.id} — ${t.mascota.nombre}` : "Sin mascota"}</td>
+                      <td style={td}>{t.mascota?.dueno?.nombre || "-"}</td>
                       <td style={td}>{t.fecha ? new Date(t.fecha).toLocaleString() : "Sin fecha"}</td>
                       <td style={td}>{t.motivo}</td>
                       <td style={td}>
